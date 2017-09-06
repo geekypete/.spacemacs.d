@@ -310,6 +310,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun dotspacemacs/user-config ()
   (setq ess-use-auto-complete t)
 	(with-eval-after-load 'org
+    ;; Set org-todo keywords
+    (setq org-todo-keywords
+          '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED")))
     ;; Set Codeblocks to execute without prompt
     (setq org-confirm-babel-evaluate nil)
     ;; Set default bibliography location for org-ref
