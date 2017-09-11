@@ -56,6 +56,7 @@ values."
           )
      latex
      bibtex
+     pandoc
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -347,6 +348,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
+       (shell . t)
        (R . t)))
     ;;fontify code in code blocks
     (setq org-src-fontify-natively t)
