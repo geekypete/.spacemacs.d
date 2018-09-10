@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csv
      octave
      javascript
      markdown
@@ -51,6 +52,7 @@ values."
      emacs-lisp
      auto-completion
      git
+     trello
      ;; markdown
      org
      (org :variables
@@ -79,6 +81,7 @@ values."
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
                                     smartparens
+                                    orgit
                                     )
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -314,6 +317,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
+(setq bibtex-completion-notes-template-one-file
+      (format
+       "\n** ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
+  (setq helm-bibtex-bibliography "~/Documents/org/research/articles.bib"
+        helm-bibtex-library-path "~/Documents/org/research/pdfs"
+        helm-bibtex-notes-path "~/Documents/org/research/articles.org")
   (setq ess-use-auto-complete t)
   ;; Set zsh as default shell 
   (setq multi-term-program "/bin/zsh")
@@ -339,8 +348,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
             ("a"               ; key
              "Article"         ; name
              entry             ; type
-             (file+headline "~/Documents/org/articles.org" "Article")  ; target
-             "* %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"  ; template
+             (file+headline "~/Documents/org/notes.org" "Article")  ; target
+             "* %^{Title} %(org-set-tags) :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"  ; template
              :prepend t        ; properties
              :empty-lines 1    ; properties
              :created t        ; properties
@@ -351,10 +360,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
           '((sequence "TODO" "IN-PROGRESS(p)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
     ;; Set Codeblocks to execute without prompt
     (setq org-confirm-babel-evaluate nil)
+    (setq org-ref-note-title-format "* [[/Users/geekypete/Documents/org/research/pdfs/%k.pdf][%k]] - %t\n :PROPERTIES:\n :Custom_ID: %k\n :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/%k.pdf\n :END:\n")
     ;; Set default bibliography location for org-ref
-    (setq org-ref-default-bibliography "~/references.bib"
-          org-ref-bibliography-notes "~/Documents/org/articles.org"
-          org-ref-pdf-directory "~/Documents/TDA_Data/Articles")
+    (setq org-ref-default-bibliography "~/Documents/org/research/articles.bib"
+          org-ref-bibliography-notes "~/Documents/org/research/articles.org"
+          org-ref-pdf-directory "~/Documents/org/research/pdfs/"
+          org-ref-notes-directory "~/Documents/org/research/notes/")
+    ;; Ensure that org-ref-open-bibtex-notes is used instead of doi-utils-make-notes
+    (setq doi-utils-make-notes-function 'org-ref-open-bibtex-notes)
     ;; Ensure LaTeX compiles documents with bibtex
     (require 'ox-bibtex)
 	  (setq org-latex-pdf-process
@@ -423,9 +436,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
  '(org-agenda-files
    (quote
     ("/Users/geekypete/Documents/org/instapath.org" "/Users/geekypete/Documents/org/conferences.org" "/Users/geekypete/Documents/org/development.org" "/Users/geekypete/Documents/org/google.org" "/Users/geekypete/Documents/org/lab_notebook.org" "/Users/geekypete/Documents/org/meetings.org" "/Users/geekypete/Documents/org/org-tutorial.org" "/Users/geekypete/Documents/org/papers.org" "/Users/geekypete/Documents/org/personal.org" "/Users/geekypete/Documents/org/research.org" "/Users/geekypete/Documents/org/sim.org" "/Users/geekypete/Documents/org/tdagrant.org" "/Users/geekypete/Documents/org/temp.org" "/Users/geekypete/Documents/org/todo.org" "/Users/geekypete/Documents/org/wtl.org")))
+ '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (pdf-tools flyspell-correct-helm flyspell-correct auto-dictionary xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help ein websocket interleave helm-company helm-c-yasnippet company-web web-completion-data company-tern dash-functional tern company-statistics company-auctex company-anaconda company auto-yasnippet ac-ispell auto-complete auctex-latexmk auctex web-beautify livid-mode skewer-mode simple-httpd js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat ox-reveal org-gcal request-deferred deferred calfw google-maps mmm-mode markdown-toc markdown-mode gh-md yaml-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor org-ref key-chord ivy helm-bibtex parsebib biblio biblio-core web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode ess-smart-equals ess-R-object-popup ess-R-data-view ctable ess julia-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
+    (org-trello csv-mode pdf-tools flyspell-correct-helm flyspell-correct auto-dictionary xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help ein websocket interleave helm-company helm-c-yasnippet company-web web-completion-data company-tern dash-functional tern company-statistics company-auctex company-anaconda company auto-yasnippet ac-ispell auto-complete auctex-latexmk auctex web-beautify livid-mode skewer-mode simple-httpd js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat ox-reveal org-gcal request-deferred deferred calfw google-maps mmm-mode markdown-toc markdown-mode gh-md yaml-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor org-ref key-chord ivy helm-bibtex parsebib biblio biblio-core web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode ess-smart-equals ess-R-object-popup ess-R-data-view ctable ess julia-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
