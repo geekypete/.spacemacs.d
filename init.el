@@ -31,29 +31,24 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
      csv
      octave
      javascript
      markdown
      yaml
      html
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
      helm
      spell-checking
-     docker
      python
      ess
-     ;; auto-completion
-     ;; better-defaults
      emacs-lisp
      auto-completion
      git
-     trello
-     ;; markdown
      org
      (org :variables
           org-enable-reveal-js-support t
@@ -61,15 +56,11 @@ values."
      latex
      bibtex
      pandoc
-     ipython-notebook
-     pdf-tools
+     pdf
     (shell :variables
             shell-default-shell 'multi-term)
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
