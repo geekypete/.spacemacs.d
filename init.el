@@ -344,6 +344,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
              :empty-lines 1    ; properties
              :created t        ; properties
              )  
+            ("m" "Meeting" entry (file "~/Documents/org/meetings.org")
+             "* MEETING: with %?\n" :clock-in t :clock-resume t :empty-lines 1)
+            ("n" "Note" entry (file "~/Documents/org/research.org")
+             "* NOTE %?\n%U" :empty-lines 1)
+            ("N" "Note with Clipboard" entry (file "~/Documents/org/research.org")
+             "* NOTE %?\n%U\n   %x" :empty-lines 1)
              ))  
     ;; Set org-todo keywords
     (setq org-todo-keywords
