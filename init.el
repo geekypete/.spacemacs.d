@@ -307,6 +307,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
+  (setq bibtex-completion-notes-path "~/Documents/org/articles.org")
 (setq bibtex-completion-notes-template-one-file
       (format
        "\n** ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
