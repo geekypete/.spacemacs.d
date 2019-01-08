@@ -43,7 +43,6 @@ values."
      yaml
      html
      helm
-     spell-checking
      python
      ess
      emacs-lisp
