@@ -310,7 +310,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq bibtex-completion-notes-path "~/Documents/org/articles.org")
 (setq bibtex-completion-notes-template-one-file
       (format
-       "\n** ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
+       "\n* ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
   (setq helm-bibtex-bibliography "~/Documents/org/research/articles.bib"
         helm-bibtex-library-path "~/Documents/org/research/pdfs"
         helm-bibtex-notes-path "~/Documents/org/research/articles.org")
