@@ -334,7 +334,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (alltodo "")))))
     ;; Custom capture templates
     (setq org-capture-templates
-          '(("t" "Todo" entry (file+headline (concat org-directory "todo.org") "Tasks")
+          '(("t" "Todo" entry (file "~/Documents/org/todo.org")
              "* TODO %?\n  %U\n  %i\n  %a")
             ("a"               ; key
              "Article"         ; name
