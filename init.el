@@ -336,6 +336,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-capture-templates
           '(("t" "Todo" entry (file "~/Documents/org/todo.org")
              "* TODO %?\n  %U\n  %i\n  %a")
+            ("T" "Todo with Clipboard" entry (file "~/Documents/org/todo.org")
+             "* TODO %?\n  %U\n  %i\n  %x  %a")
             ("a"               ; key
              "Article"         ; name
              entry             ; type
