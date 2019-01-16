@@ -307,6 +307,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
+(custom-set-variables
+ ;; Your other configuration here
+ ;; ...
+ '(TeX-view-program-list (quote (("Zathura" "zathura %o")))) ; [1]
+ '(TeX-view-program-selection
+  (quote
+   (((output-dvi style-pstricks) "dvips and gv")
+   (output-dvi "xdvi")
+   (output-pdf "Zathura")                                    ; [2]
+   (output-html "xdg-open")))))
   (setq bibtex-completion-notes-path "~/Documents/org/articles.org")
 (setq bibtex-completion-notes-template-one-file
       (format
