@@ -318,13 +318,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
    (output-dvi "xdvi")
    (output-pdf "Zathura")                                    ; [2]
    (output-html "xdg-open")))))
-  (setq bibtex-completion-notes-path "~/Documents/org/articles.org")
+  (setq bibtex-completion-notes-path "~/Documents/research/org/articles.org")
 (setq bibtex-completion-notes-template-one-file
       (format
-       "\n* ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
-  (setq helm-bibtex-bibliography "~/Documents/org/research/articles.bib"
-        helm-bibtex-library-path "~/Documents/org/research/pdfs"
-        helm-bibtex-notes-path "~/Documents/org/research/articles.org")
+       "\n* ${year} - ${title}\n :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :AUTHOR: ${author}\n  :JOURNAL: ${journal}\n  :YEAR: ${year}\n  :VOLUME: ${volume}\n  :PAGES: ${pages}\n  :Keywords: ${keywords}\n  :Projects: ${groups}\n  :INTERLEAVE_PDF: /Users/geekypete/Documents/research/org/research/pdfs/${=key=}.pdf\n :END:\n [[/Users/geekypete/Documents/research/org/research/pdfs/${=key=}.pdf][${=key=}]]\n"))
+  (setq helm-bibtex-bibliography "~/Documents/research/org/research/articles.bib"
+        helm-bibtex-library-path "~/Documents/research/org/research/pdfs"
+        helm-bibtex-notes-path "~/Documents/research/org/research/articles.org")
   (setq ess-use-auto-complete t)
   ;; Set zsh as default shell 
   (setq multi-term-program "/bin/zsh")
@@ -345,24 +345,24 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (alltodo "")))))
     ;; Custom capture templates
     (setq org-capture-templates
-          '(("t" "Todo" entry (file "~/Documents/org/todo.org")
+          '(("t" "Todo" entry (file "~/Documents/research/org/todo.org")
              "* TODO %?\n  %U\n  %i\n  %a")
-            ("T" "Todo with Clipboard" entry (file "~/Documents/org/todo.org")
+            ("T" "Todo with Clipboard" entry (file "~/Documents/research/org/todo.org")
              "* TODO %?\n  %U\n  %i\n  %x  %a")
             ("a"               ; key
              "Article"         ; name
              entry             ; type
-             (file+headline "~/Documents/org/notes.org" "Article")  ; target
+             (file+headline "~/Documents/research/org/notes.org" "Article")  ; target
              "* %^{Title} %(org-set-tags) :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"  ; template
              :prepend t        ; properties
              :empty-lines 1    ; properties
              :created t        ; properties
              )  
-            ("m" "Meeting" entry (file "~/Documents/org/meetings.org")
+            ("m" "Meeting" entry (file "~/Documents/research/org/meetings.org")
              "* MEETING: with %?\n" :clock-in t :clock-resume t :empty-lines 1)
-            ("n" "Note" entry (file "~/Documents/org/research.org")
+            ("n" "Note" entry (file "~/Documents/research/org/research.org")
              "* NOTE %?\n%U" :empty-lines 1)
-            ("N" "Note with Clipboard" entry (file "~/Documents/org/research.org")
+            ("N" "Note with Clipboard" entry (file "~/Documents/research/org/research.org")
              "* NOTE %?\n%U\n   %x" :empty-lines 1)
              ))  
     ;; Set org-todo keywords
@@ -370,12 +370,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
           '((sequence "TODO" "IN-PROGRESS(p)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
     ;; Set Codeblocks to execute without prompt
     (setq org-confirm-babel-evaluate nil)
-    (setq org-ref-note-title-format "* [[/Users/geekypete/Documents/org/research/pdfs/%k.pdf][%k]] - %t\n :PROPERTIES:\n :Custom_ID: %k\n :INTERLEAVE_PDF: /Users/geekypete/Documents/org/research/pdfs/%k.pdf\n :END:\n")
+    (setq org-ref-note-title-format "* [[/Users/geekypete/Documents/research/org/research/pdfs/%k.pdf][%k]] - %t\n :PROPERTIES:\n :Custom_ID: %k\n :INTERLEAVE_PDF: /Users/geekypete/Documents/research/org/research/pdfs/%k.pdf\n :END:\n")
     ;; Set default bibliography location for org-ref
-    (setq org-ref-default-bibliography "~/Documents/org/research/articles.bib"
-          org-ref-bibliography-notes "~/Documents/org/research/articles.org"
-          org-ref-pdf-directory "~/Documents/org/research/pdfs/"
-          org-ref-notes-directory "~/Documents/org/research/notes/")
+    (setq org-ref-default-bibliography "~/Documents/research/org/research/articles.bib"
+          org-ref-bibliography-notes "~/Documents/research/org/research/articles.org"
+          org-ref-pdf-directory "~/Documents/research/org/research/pdfs/"
+          org-ref-notes-directory "~/Documents/research/org/research/notes/")
     ;; Ensure that org-ref-open-bibtex-notes is used instead of doi-utils-make-notes
     (setq doi-utils-make-notes-function 'org-ref-open-bibtex-notes)
     ;; Ensure LaTeX compiles documents with bibtex
@@ -414,7 +414,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
        (R . t)))
     ;;fontify code in code blocks
     (setq org-src-fontify-natively t)
-	  (setq org-agenda-files (quote ("~/Documents/org/")))
+	  (setq org-agenda-files (quote ("~/Documents/research/org/")))
 	  (setq org-enforce-todo-dependencies t)
 	  ;;  forces you to mark all child tasks as “DONE” before you can mark the parent as “DONE.”
 	  ;; (setq org-log-done (quote time)) 	
@@ -430,7 +430,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 	  ;; Add a closing note upon closing TODO item ... there is a bug here, need to resolve
 	  (setq org-refile-targets '((nil :maxlevel . 9)
 				       (org-agenda-files :maxlevel . 9)))
-	  (setq org-ref-default-bibliography '("~/Documents/org/references.bib"))
+	  (setq org-ref-default-bibliography '("~/Documents/research/org/references.bib"))
 
 
   ))
@@ -445,7 +445,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("/Users/geekypete/Documents/org/instapath.org" "/Users/geekypete/Documents/org/conferences.org" "/Users/geekypete/Documents/org/development.org" "/Users/geekypete/Documents/org/google.org" "/Users/geekypete/Documents/org/lab_notebook.org" "/Users/geekypete/Documents/org/meetings.org" "/Users/geekypete/Documents/org/org-tutorial.org" "/Users/geekypete/Documents/org/papers.org" "/Users/geekypete/Documents/org/personal.org" "/Users/geekypete/Documents/org/research.org" "/Users/geekypete/Documents/org/sim.org" "/Users/geekypete/Documents/org/tdagrant.org" "/Users/geekypete/Documents/org/temp.org" "/Users/geekypete/Documents/org/todo.org" "/Users/geekypete/Documents/org/wtl.org")))
+    ("/Users/geekypete/Documents/research/org/instapath.org" "/Users/geekypete/Documents/research/org/conferences.org" "/Users/geekypete/Documents/research/org/development.org" "/Users/geekypete/Documents/research/org/google.org" "/Users/geekypete/Documents/research/org/lab_notebook.org" "/Users/geekypete/Documents/research/org/meetings.org" "/Users/geekypete/Documents/research/org/org-tutorial.org" "/Users/geekypete/Documents/research/org/papers.org" "/Users/geekypete/Documents/research/org/personal.org" "/Users/geekypete/Documents/research/org/research.org" "/Users/geekypete/Documents/research/org/sim.org" "/Users/geekypete/Documents/research/org/tdagrant.org" "/Users/geekypete/Documents/research/org/temp.org" "/Users/geekypete/Documents/research/org/todo.org" "/Users/geekypete/Documents/research/org/wtl.org")))
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
@@ -468,7 +468,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("/Users/geekypete/Documents/org/instapath.org" "/Users/geekypete/Documents/org/conferences.org" "/Users/geekypete/Documents/org/development.org" "/Users/geekypete/Documents/org/google.org" "/Users/geekypete/Documents/org/lab_notebook.org" "/Users/geekypete/Documents/org/meetings.org" "/Users/geekypete/Documents/org/org-tutorial.org" "/Users/geekypete/Documents/org/papers.org" "/Users/geekypete/Documents/org/personal.org" "/Users/geekypete/Documents/org/research.org" "/Users/geekypete/Documents/org/sim.org" "/Users/geekypete/Documents/org/tdagrant.org" "/Users/geekypete/Documents/org/temp.org" "/Users/geekypete/Documents/org/todo.org" "/Users/geekypete/Documents/org/wtl.org")))
+    ("/Users/geekypete/Documents/research/org/instapath.org" "/Users/geekypete/Documents/research/org/conferences.org" "/Users/geekypete/Documents/research/org/development.org" "/Users/geekypete/Documents/research/org/google.org" "/Users/geekypete/Documents/research/org/lab_notebook.org" "/Users/geekypete/Documents/research/org/meetings.org" "/Users/geekypete/Documents/research/org/org-tutorial.org" "/Users/geekypete/Documents/research/org/papers.org" "/Users/geekypete/Documents/research/org/personal.org" "/Users/geekypete/Documents/research/org/research.org" "/Users/geekypete/Documents/research/org/sim.org" "/Users/geekypete/Documents/research/org/tdagrant.org" "/Users/geekypete/Documents/research/org/temp.org" "/Users/geekypete/Documents/research/org/todo.org" "/Users/geekypete/Documents/research/org/wtl.org")))
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
