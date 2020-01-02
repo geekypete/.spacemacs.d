@@ -339,12 +339,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
       :config (org-super-agenda-mode))
     (setq org-super-agenda-groups
           '(
+            (:name "Complete Today"
+                   :tag "today")
             (:name "Priority"
                    :priority "A")
             (:auto-parent t)
             ))
 
-    ;; Custom agenda view
+    ;; Custom agenda view (only used when org-super-agenda-mode is not enabled
     (setq org-agenda-custom-commands
           '(("c" "Simple agenda view"
              ((tags "PRIORITY=\"A\""
@@ -444,6 +446,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 	  (setq org-refile-targets '((nil :maxlevel . 9)
 				       (org-agenda-files :maxlevel . 9)))
 	  (setq org-ref-default-bibliography '("~/Documents/research/org/references.bib"))
+    ;; Increase org-mode inline latex fragment display size
+    (plist-put org-format-latex-options :scale 1.5)
   ))
 
 
