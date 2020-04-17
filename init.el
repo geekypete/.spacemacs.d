@@ -39,7 +39,9 @@ values."
      ;; ----------------------------------------------------------------
      csv
      octave
-     javascript
+     (javascript
+      :variables javascript-repl `skewer
+      )
      markdown
      yaml
      html
@@ -48,6 +50,9 @@ values."
      ess
      emacs-lisp
      auto-completion
+     spell-checking
+     treemacs
+     lsp
      git
      org
      (org :variables
@@ -341,6 +346,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
           '(
             (:name "Complete Today"
                    :tag "today")
+            (:name "To Read"
+                   :tag "toread")
             (:name "Priority"
                    :priority "A")
             (:auto-parent t)
@@ -363,7 +370,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
           '(("t" "Todo" entry (file "~/Documents/research/org/todo.org")
              "* TODO %?\n  %U\n  %i\n  %a")
             ("T" "Todo with Clipboard" entry (file "~/Documents/research/org/todo.org")
-             "* TODO %?\n  %U\n  %i\n  %x  %a")
+             "* TODO %?\n  %U\n  %x  %a")
             ("a"               ; key
              "Article"         ; name
              entry             ; type
@@ -490,13 +497,22 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
+ '(TeX-view-program-list (quote (("Zathura" "zathura %o"))))
+ '(TeX-view-program-selection
    (quote
-    ("/Users/geekypete/Documents/research/org/instapath.org" "/Users/geekypete/Documents/research/org/conferences.org" "/Users/geekypete/Documents/research/org/development.org" "/Users/geekypete/Documents/research/org/lab_notebook.org" "/Users/geekypete/Documents/research/org/meetings-back.org" "/Users/geekypete/Documents/research/org/org-tutorial.org" "/Users/geekypete/Documents/research/org/papers.org" "/Users/geekypete/Documents/research/org/personal.org" "/Users/geekypete/Documents/research/org/research.org" "/Users/geekypete/Documents/research/org/sim.org" "/Users/geekypete/Documents/research/org/jobs.org" "/Users/geekypete/Documents/research/org/temp.org" "/Users/geekypete/Documents/research/org/todo.org" "/Users/geekypete/Documents/research/org/thesis.org")))
+    (((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "xdvi")
+     (output-pdf "Zathura")
+     (output-html "xdg-open"))))
+ '(org-agenda-files nil)
  '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (yasnippet-snippets prettier-js pippel pipenv pandoc-mode ox-pandoc ht magit-svn json-navigator hierarchy importmagic epc concurrent impatient-mode helm-git-grep gitignore-templates fuzzy org-trello csv-mode pdf-tools flyspell-correct-helm flyspell-correct auto-dictionary xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help ein websocket interleave helm-company helm-c-yasnippet company-web web-completion-data company-tern dash-functional tern company-statistics company-auctex company-anaconda company auto-yasnippet ac-ispell auto-complete auctex-latexmk auctex web-beautify livid-mode skewer-mode simple-httpd js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat ox-reveal org-gcal request-deferred deferred calfw google-maps mmm-mode markdown-toc markdown-mode gh-md yaml-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor org-ref key-chord ivy helm-bibtex parsebib biblio biblio-core web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode ess-smart-equals ess-R-object-popup ess-R-data-view ctable ess julia-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
+    (doom-modeline org-super-agenda ts toml-mode racer pos-tip cargo rust-mode pandoc-mode ox-pandoc ht fuzzy org-trello csv-mode pdf-tools flyspell-correct-helm flyspell-correct auto-dictionary xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help ein websocket interleave helm-company helm-c-yasnippet company-web web-completion-data company-tern dash-functional tern company-statistics company-auctex company-anaconda company auto-yasnippet ac-ispell auto-complete auctex-latexmk auctex web-beautify livid-mode skewer-mode simple-httpd js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat ox-reveal org-gcal request-deferred deferred calfw google-maps mmm-mode markdown-toc markdown-mode gh-md yaml-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor org-ref key-chord ivy helm-bibtex parsebib biblio biblio-core web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode ess-smart-equals ess-R-object-popup ess-R-data-view ctable ess julia-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode anaconda-mode pythonic org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+ '(safe-local-variable-values
+   (quote
+    ((org-download-image-dir . "./resources/lab_notebook")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
