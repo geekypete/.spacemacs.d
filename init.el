@@ -61,7 +61,7 @@ values."
      latex
      bibtex
      pandoc
-     pdf-tools
+     pdf
     (shell :variables
             shell-default-shell 'multi-term)
      ;;        shell-default-height 30
