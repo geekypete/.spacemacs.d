@@ -46,12 +46,13 @@ values."
      yaml
      html
      helm
-     python
      ess
+     python
      emacs-lisp
      auto-completion
      spell-checking
      treemacs
+     ranger
      lsp
      git
      org
@@ -73,6 +74,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(interleave
                                       org-super-agenda
+                                      yasnippet-snippets
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -311,8 +313,8 @@ It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
-`dotspacemacs/user-config' first."
-  (setenv "WORKON_HOME" "/home/geekypete/miniconda3/envs")
+'dotspacemacs/user-config' first."
+  (setenv "WORKON_HOME" "/home/plawson/miniconda3/envs")
   )
 
 (defun dotspacemacs/user-config ()
